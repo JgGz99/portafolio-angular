@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductoInterface } from '../interfaces/producto.interface';
-import { resolve } from 'dns';
-import { rejects } from 'assert';
+
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +14,9 @@ export class ProductosService {
   constructor(private http: HttpClient) {
     this.cargarProductos();
   }
-
+ 
   private cargarProductos() {
-    return new Promise((resolve, rejects) => {
+    return new Promise((resolve, reject) => {
       this.http
         .get('https://angular-html-77b70.firebaseio.com/productos_idx.json')
         .subscribe((resp: ProductoInterface[]) => {
@@ -28,7 +27,7 @@ export class ProductosService {
     });
   }
 
-  getProducto(id: String) {
+  getProducto(id: string) {
     return this.http.get(
       `https://angular-html-77b70.firebaseio.com/productos/${id}.json`
     );
